@@ -244,7 +244,7 @@
         <h1>The Daily <span>Love</span> News</h1>
         <p class="dek">Specially published for my one and only Mamas Sayang.</p>
         <div class="issue-meta">
-          <span>Wednesday · <b id="todayDate">19 November 2026</b></span><span>Edition No. <b>001</b></span><span>Page <b>01</b> of 01</span>
+          <span>Wednesday · <b id="todayDate">20 November 2026</b></span><span>Edition No. <b>001</b></span><span>Page <b>01</b> of 01</span>
         </div>
       </header>
 
@@ -341,8 +341,7 @@
       const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
       const dateNode = $('#todayDate');
-      const now = new Date();
-      if (dateNode) dateNode.textContent = now.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+      if (dateNode) dateNode.textContent = '20 November 2026';
 
       $$('.photo-input').forEach((input, index) => {
         const frame = input.closest('.photo-frame');
