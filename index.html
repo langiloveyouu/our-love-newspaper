@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f8eddf" />
+  <meta name="description" content="A tiny romantic newspaper made especially for Mamas Sayang." />
+  <title>THE DAILY LOVE NEWS — SPECIAL EDITION FOR MAMAS SAYANG</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Homemade+Apple&family=Libre+Franklin:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,500;1,600;1,700&display=swap');
+
+    :root {
+      --paper: #f8eddf;
+      --paper-light: #fff8ed;
+      --paper-deep: #ecd9c3;
+      --ink: #4d3028;
+      --muted: #8c6559;
+      --rose: #d98697;
+      --rose-dark: #bd5f78;
+      --rose-pale: #f6ced3;
+      --blush: #f7e1dd;
+      --sun: #f3b55f;
+      --sage: #a8b795;
+      --shadow: rgba(87, 47, 38, .14);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Libre Franklin', Arial, sans-serif;
+      --mono: 'DM Mono', monospace;
+      --script: 'Homemade Apple', 'Brush Script MT', cursive;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(217,134,151,.12), transparent 23rem),
+        radial-gradient(circle at 90% 70%, rgba(243,181,95,.12), transparent 25rem),
+        var(--paper);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .23;
+      z-index: 10;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+    ::selection { background: var(--rose-pale); color: var(--ink); }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .site-shell { max-width: 1240px; margin: 0 auto; padding: 24px 18px 50px; position: relative; }
+    .paper-frame {
+      position: relative;
+      background: rgba(255, 248, 237, .78);
+      border: 1px solid rgba(189,95,120,.36);
+      box-shadow: 0 20px 65px rgba(93,53,42,.14);
+      padding: clamp(16px, 3vw, 36px);
+      overflow: hidden;
+    }
+    .paper-frame::before, .paper-frame::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(217,134,151,.32);
+      pointer-events: none;
+    }
+    .paper-frame::after { inset: 13px; border-style: dashed; border-color: rgba(189,95,120,.22); }
+
+    .masthead { position: relative; text-align: center; padding: 28px 14px 18px; border-bottom: 5px double var(--ink); }
+    .eyebrow { font: 500 11px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--rose-dark); }
+    .masthead h1 { margin: 13px 0 5px; font: 800 clamp(38px, 8vw, 86px)/.92 var(--serif); letter-spacing: -.055em; text-transform: uppercase; }
+    .masthead h1 span { color: var(--rose-dark); }
+    .masthead .dek { margin: 10px auto 15px; font: italic 600 clamp(15px, 2vw, 20px) var(--serif); }
+    .issue-meta { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; font: 500 10px var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+    .issue-meta b { color: var(--ink); }
+
+    .nav-strip { display:flex; justify-content:space-between; gap:12px; align-items:center; padding: 12px 4px 8px; border-bottom: 1px solid rgba(77,48,40,.35); }
+    .nav-links { display:flex; flex-wrap:wrap; gap: 12px; }
+    .nav-links a { color: var(--ink); font: 700 10px var(--mono); letter-spacing: .12em; text-decoration:none; text-transform:uppercase; }
+    .nav-links a:hover { color: var(--rose-dark); }
+    .ticker { flex: 1; text-align:right; white-space:nowrap; overflow:hidden; color:var(--rose-dark); font: 500 10px var(--mono); letter-spacing:.08em; }
+
+    .hero { display:grid; grid-template-columns: 1.35fr .65fr; gap: 24px; padding: 35px 12px 28px; align-items: center; }
+    .label { display:inline-flex; align-items:center; gap:7px; font: 700 10px var(--mono); text-transform:uppercase; letter-spacing:.18em; color:var(--rose-dark); }
+    .dot { width: 7px; height:7px; border-radius:50%; background:var(--rose-dark); box-shadow:0 0 0 4px var(--rose-pale); }
+    .hero h2 { margin: 13px 0 15px; max-width: 750px; font: 800 clamp(42px, 8vw, 92px)/.9 var(--serif); letter-spacing:-.06em; text-transform:uppercase; }
+    .hero h2 em { color: var(--rose-dark); font-style:normal; }
+    .hero-copy { max-width:620px; margin:0; font: italic 600 18px/1.5 var(--serif); color:var(--muted); }
+    .hero-stamp { position:relative; min-height:220px; display:grid; place-items:center; }
+    .sunburst { width:180px; height:180px; position:relative; display:grid; place-items:center; animation: float 5s ease-in-out infinite; }
+    .sunburst::before { content:'☀'; position:absolute; inset:0; display:grid; place-items:center; font-size:146px; color:var(--sun); line-height:1; filter: drop-shadow(0 8px 0 rgba(189,95,120,.12)); }
+    .sun-core { width:100px; height:100px; position:relative; z-index:1; display:grid; place-items:center; border-radius:50%; border: 3px solid var(--ink); background: #ffd787; color:var(--ink); font: 800 37px var(--serif); transform: rotate(-7deg); box-shadow: 5px 7px 0 rgba(77,48,40,.14); }
+    .sun-note { position:absolute; right: 6%; bottom: 0; padding:7px 11px; transform:rotate(7deg); background:var(--blush); border:1px solid var(--rose); font: 14px var(--script); box-shadow:3px 4px 0 rgba(77,48,40,.12); }
+    .heart-burst { position:absolute; left: 8%; top: 9%; font-size:25px; color:var(--rose-dark); transform: rotate(-16deg); }
+
+    .rule { border:0; border-top: 1px solid rgba(77,48,40,.42); margin: 0 12px; }
+    .main-grid { display:grid; grid-template-columns: minmax(0, 1.6fr) minmax(250px, .75fr); gap: 28px; padding: 25px 12px; }
+    .article { column-count: 2; column-gap: 28px; text-align:justify; font: 400 15px/1.75 Georgia, serif; }
+    .article p { margin:0 0 14px; }
+    .article .lead::first-letter { float:left; color:var(--rose-dark); font:800 75px/.72 var(--serif); padding: 8px 9px 0 0; }
+    .article .pullquote { break-inside:avoid; column-span:all; margin: 18px 0; padding: 15px 17px; border-top: 1px solid var(--rose); border-bottom: 1px solid var(--rose); text-align:center; color:var(--rose-dark); font: italic 700 23px/1.2 var(--serif); }
+    .byline { display:flex; gap:10px; align-items:center; margin-bottom: 14px; color:var(--muted); font: 10px var(--mono); text-transform:uppercase; letter-spacing:.11em; }
+    .byline::before { content:'♥'; color:var(--rose-dark); font-size:14px; }
+    .sidebar-card { padding: 17px; background:rgba(247,225,221,.62); border:1px solid rgba(189,95,120,.45); box-shadow: 4px 5px 0 rgba(189,95,120,.10); transform: rotate(1deg); }
+    .sidebar-card h3 { margin:0 0 10px; font:800 25px/1.05 var(--serif); }
+    .sidebar-card p { margin:0; font: 15px/1.65 Georgia, serif; }
+    .sidebar-card .scribble { margin-top:13px; text-align:right; color:var(--rose-dark); font: 16px var(--script); }
+    .mini-facts { margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .fact { padding:12px 9px; text-align:center; border-top:2px solid var(--ink); border-bottom:1px solid var(--ink); }
+    .fact b { display:block; font:800 24px var(--serif); color:var(--rose-dark); }
+    .fact span { display:block; margin-top:4px; font:500 9px var(--mono); text-transform:uppercase; letter-spacing:.08em; }
+
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:14px; margin: 8px 12px 16px; padding-bottom:8px; border-bottom: 2px solid var(--ink); }
+    .section-head h2 { margin:0; font:800 clamp(26px, 4vw, 44px)/1 var(--serif); letter-spacing:-.05em; text-transform:uppercase; }
+    .section-head .section-number { color:var(--rose-dark); font:500 10px var(--mono); letter-spacing:.1em; }
+
+    .news-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin: 0 12px 30px; }
+    .news-card { min-height:245px; position:relative; padding:19px 16px 17px; border:1px solid rgba(77,48,40,.55); background:rgba(255,255,255,.22); transition:transform .3s ease, box-shadow .3s ease, background .3s ease; }
+    .news-card:nth-child(2) { transform:translateY(13px) rotate(-1.4deg); background:rgba(247,225,221,.55); }
+    .news-card:nth-child(3) { transform:rotate(1.5deg); }
+    .news-card:hover { transform: translateY(-6px) rotate(0); background:var(--paper-light); box-shadow:7px 9px 0 rgba(189,95,120,.13); }
+    .news-card h3 { margin:0 0 9px; font:800 25px/1.05 var(--serif); letter-spacing:-.04em; }
+    .news-card p { margin:0; font:15px/1.65 Georgia,serif; }
+    .news-icon { display:block; margin-bottom:12px; font-size:29px; }
+    .news-card .stamp { position:absolute; right:13px; bottom:13px; color:var(--rose-dark); font:12px var(--script); transform:rotate(-8deg); }
+
+    .gallery-section { padding-top:20px; }
+    .gallery-intro { display:grid; grid-template-columns:1.2fr .8fr; gap:22px; margin:0 12px 18px; align-items:end; }
+    .gallery-intro p { margin:0; max-width:710px; font:italic 600 17px/1.5 var(--serif); color:var(--muted); }
+    .upload-hint { justify-self:end; max-width:260px; padding:11px 13px; background:#fff4bc; border:1px dashed #b99c51; transform:rotate(2deg); font:12px/1.4 var(--mono); box-shadow:3px 4px 0 rgba(91,69,34,.08); }
+    .gallery { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:0 12px 34px; }
+    .photo-card { position:relative; padding:9px 9px 14px; background:#fffaf2; border:1px solid rgba(77,48,40,.23); box-shadow:4px 5px 0 rgba(77,48,40,.11); transition:transform .25s ease; }
+    .photo-card:nth-child(1) { transform:rotate(-2deg); } .photo-card:nth-child(2) { transform:rotate(1.4deg); } .photo-card:nth-child(3) { transform:rotate(-.8deg); } .photo-card:nth-child(4) { transform:rotate(2.3deg); }
+    .photo-card:hover { transform:translateY(-7px) rotate(0); z-index:2; }
+    .photo-frame { position:relative; aspect-ratio: 1 / .9; display:grid; place-items:center; overflow:hidden; background:linear-gradient(135deg,#f2d9ce,#f8efd6); border:1px solid rgba(77,48,40,.16); }
+    .photo-frame img { width:100%; height:100%; object-fit:cover; display:none; }
+    .photo-frame.has-image img { display:block; }
+    .photo-placeholder { display:grid; place-items:center; gap:5px; text-align:center; padding:10px; color:var(--rose-dark); }
+    .photo-placeholder .big { font-size:34px; }
+    .photo-placeholder span { font: 11px/1.35 var(--mono); text-transform:uppercase; letter-spacing:.08em; }
+    .upload-label { position:absolute; inset:0; display:grid; place-items:center; opacity:0; background:rgba(77,48,40,.48); color:white; font:700 11px var(--mono); letter-spacing:.1em; text-transform:uppercase; transition:opacity .2s; }
+    .photo-frame:hover .upload-label, .photo-frame:focus-within .upload-label { opacity:1; }
+    .photo-input { position:absolute; width:1px; height:1px; opacity:0; }
+    .caption { margin:11px 4px 0; font:14px/1.35 var(--script); color:var(--ink); }
+    .caption small { display:block; margin-top:6px; color:var(--muted); font: 9px var(--mono); letter-spacing:.05em; text-transform:uppercase; }
+
+    .secret-section { margin: 20px 12px 34px; padding: 28px 18px 30px; background:linear-gradient(135deg, rgba(247,225,221,.8), rgba(255,249,232,.8)); border:1px solid rgba(189,95,120,.45); text-align:center; }
+    .secret-section h2 { margin:0 0 7px; font:800 36px var(--serif); }
+    .secret-section > p { margin:0 auto 20px; max-width:600px; font:italic 16px/1.45 var(--serif); color:var(--muted); }
+    .envelope-wrap { min-height: 190px; display:grid; place-items:center; perspective: 1000px; }
+    .envelope { position:relative; width:min(420px, 90vw); height:150px; border:2px solid var(--ink); background:#e9a6b3; box-shadow:8px 10px 0 rgba(77,48,40,.15); cursor:pointer; transform-style:preserve-3d; transition:transform .8s ease, box-shadow .3s ease; }
+    .envelope:hover { box-shadow:11px 13px 0 rgba(77,48,40,.15); }
+    .envelope::before { content:''; position:absolute; z-index:3; left:0; right:0; top:0; border-left:calc(min(420px, 90vw) / 2) solid transparent; border-right:calc(min(420px, 90vw) / 2) solid transparent; border-top:84px solid #d98697; transform-origin:top; transition:transform .8s ease; }
+    .envelope::after { content:''; position:absolute; inset:0; z-index:2; background: linear-gradient(32deg, transparent 49.5%, #bd5f78 50%, transparent 51%), linear-gradient(-32deg, transparent 49.5%, #bd5f78 50%, transparent 51%); opacity:.6; }
+    .envelope-mark { position:absolute; z-index:5; left:50%; top:59%; transform:translate(-50%,-50%); width:48px; height:48px; display:grid; place-items:center; border-radius:50%; background:#fff0ee; border:2px solid var(--ink); font-size:22px; transition:opacity .3s; }
+    .envelope-letter { position:absolute; z-index:1; left:7%; right:7%; bottom:5%; height:125px; padding:15px; overflow:hidden; background:#fff9ea; border:1px solid var(--ink); text-align:left; transform:translateY(15px); transition:transform .8s ease; }
+    .envelope-letter h3 { margin:0 0 7px; font:italic 20px var(--serif); }
+    .envelope-letter p { margin:0; font:13px/1.45 Georgia,serif; }
+    .envelope.open { transform:translateY(12px); }
+    .envelope.open::before { transform:rotateX(180deg); z-index:0; }
+    .envelope.open .envelope-letter { transform:translateY(-92px); z-index:4; box-shadow:0 0 0 1px rgba(77,48,40,.2); }
+    .envelope.open .envelope-mark { opacity:0; }
+    .envelope-status { margin-top:6px; color:var(--rose-dark); font:13px var(--script); }
+
+    .quote-section { padding-top: 3px; }
+    .quote-box { position:relative; margin:0 12px 34px; min-height:180px; padding:30px 34px; display:grid; place-items:center; text-align:center; background:var(--ink); color:var(--paper-light); overflow:hidden; }
+    .quote-box::before, .quote-box::after { content:'“'; position:absolute; color:var(--rose); font:150px/.5 var(--serif); opacity:.5; }
+    .quote-box::before { left:12px; top:28px; } .quote-box::after { content:'”'; right:12px; bottom:0; }
+    .quote-text { position:relative; max-width:780px; margin:0; font:italic 700 clamp(21px,3vw,34px)/1.25 var(--serif); transition:opacity .25s ease, transform .25s ease; }
+    .quote-text.changing { opacity:0; transform:translateY(8px); }
+    .quote-source { margin:13px 0 0; color:var(--rose-pale); font:10px var(--mono); letter-spacing:.13em; text-transform:uppercase; }
+    .news-button, .music-button { border:1px solid var(--ink); background:#fff8ed; color:#3a211b; padding:11px 16px; font:700 10px var(--mono); letter-spacing:.1em; text-transform:uppercase; transition:all .25s ease; }
+    .news-button:hover, .music-button:hover { background:var(--rose); color:white; transform:translateY(-2px); }
+    .quote-actions { position:relative; display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin-top:19px; }
+
+    .final-edition { padding: 24px 12px 8px; border-top:5px double var(--ink); text-align:center; }
+    .final-edition h2 { margin:0 0 12px; font:800 clamp(27px,5vw,48px) var(--serif); letter-spacing:-.05em; }
+    .final-edition p { max-width:800px; margin:0 auto; font:italic 700 clamp(18px,2.5vw,26px)/1.5 var(--serif); }
+    .signature { margin:20px 0 6px; color:var(--rose-dark); font:21px/1.6 var(--script); }
+    .music-player { display:flex; justify-content:center; align-items:center; gap:12px; margin-top:14px; }
+    .music-status { font:10px var(--mono); color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+    .audio-bars { display:flex; align-items:end; gap:3px; height:16px; width:31px; }
+    .audio-bars i { display:block; width:4px; height:5px; border-radius:2px; background:var(--rose-dark); }
+    .music-player.playing .audio-bars i { animation: equalize .65s ease-in-out infinite alternate; }
+    .music-player.playing .audio-bars i:nth-child(2) { animation-delay:.15s; } .music-player.playing .audio-bars i:nth-child(3) { animation-delay:.3s; } .music-player.playing .audio-bars i:nth-child(4) { animation-delay:.08s; }
+    .footer-line { margin-top:28px; padding-top:9px; border-top:1px solid rgba(77,48,40,.3); display:flex; justify-content:space-between; gap:10px; font:9px var(--mono); color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+
+    .floaters { position:fixed; inset:0; pointer-events:none; z-index:20; overflow:hidden; }
+    .floater { position:absolute; bottom:-30px; color:var(--rose-dark); opacity:0; animation: rise var(--dur) linear forwards; font-size:var(--size); left:var(--left); }
+    .petal { position:absolute; width:9px; height:13px; border-radius:100% 0 100% 0; background:var(--rose-pale); opacity:.75; animation:drift 8s ease-in-out infinite; left:var(--left); top:var(--top); transform:rotate(var(--rot)); }
+
+    @keyframes float { 0%,100%{ transform:translateY(0) rotate(-2deg);} 50%{transform:translateY(-12px) rotate(3deg);} }
+    @keyframes rise { 0%{transform:translateY(0) rotate(0);opacity:0;} 12%{opacity:.85;} 100%{transform:translateY(-110vh) rotate(40deg);opacity:0;} }
+    @keyframes drift { 0%,100%{transform:translate(0,0) rotate(var(--rot));} 50%{transform:translate(15px,22px) rotate(calc(var(--rot) + 15deg));} }
+    @keyframes equalize { from{height:5px;} to{height:16px;} }
+
+    @media (max-width: 860px) {
+      .hero, .main-grid, .gallery-intro { grid-template-columns:1fr; }
+      .hero-stamp { min-height:175px; }
+      .hero h2 { max-width:620px; }
+      .sidebar-card { transform:none; }
+      .gallery { grid-template-columns:repeat(2,1fr); }
+      .upload-hint { justify-self:start; }
+      .ticker { display:none; }
+    }
+    @media (max-width: 640px) {
+      .site-shell { padding:0; }
+      .paper-frame { padding: 14px 10px 30px; border-left:0; border-right:0; }
+      .paper-frame::before { inset:5px 3px; } .paper-frame::after { inset:9px 6px; }
+      .masthead { padding-top:28px; }
+      .masthead h1 { font-size:47px; }
+      .nav-strip { display:block; padding-inline:5px; }
+      .nav-links { justify-content:center; }
+      .hero { padding-top:25px; }
+      .hero h2 { font-size:56px; }
+      .article { column-count:1; }
+      .news-grid { grid-template-columns:1fr; }
+      .news-card:nth-child(2), .news-card:nth-child(3) { transform:none; }
+      .gallery { grid-template-columns:1fr 1fr; gap:11px; }
+      .photo-card { padding:6px 6px 10px; }
+      .caption { font-size:12px; }
+      .secret-section { margin-inline:5px; padding-inline:10px; }
+      .quote-box { padding:30px 18px; }
+      .quote-text { font-size:22px; }
+      .footer-line { flex-direction:column; align-items:center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.001ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floaters" aria-hidden="true" id="floaters"></div>
+  <main class="site-shell">
+    <div class="paper-frame">
+      <header class="masthead" id="top">
+        <div class="eyebrow">The world's tiniest love desk · Est. just for you</div>
+        <h1>The Daily <span>Love</span> News</h1>
+        <p class="dek">Specially published for my one and only Mamas Sayang.</p>
+        <div class="issue-meta">
+          <span>Wednesday · <b id="todayDate">19 November 2026</b></span><span>Edition No. <b>001</b></span><span>Page <b>01</b> of 01</span>
+        </div>
+      </header>
+
+      <nav class="nav-strip" aria-label="Newspaper sections">
+        <div class="nav-links">
+          <a href="#berita">Berita Utama</a><a href="#breaking">Breaking News</a><a href="#gallery">Love Report</a><a href="#secret">Secret Edition</a>
+        </div>
+        <div class="ticker">LIVE FROM MY HEART: MAMAS SAYANG IS STILL MY FAVORITE PERSON ♥</div>
+      </nav>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <div class="label"><span class="dot"></span> Morning bulletin · exclusive</div>
+          <h2 id="hero-title">Good morning,<br><em>Mamas Sayang!</em></h2>
+          <p class="hero-copy">A fresh little paper for the cutest person in my universe. Please read slowly, smile a little, and know that I am thinking about you already.</p>
+        </div>
+        <div class="hero-stamp">
+          <span class="heart-burst">♥</span><div class="sunburst"><div class="sun-core">hi!</div></div><div class="sun-note">you are my sunshine ☼</div>
+        </div>
+      </section>
+
+      <hr class="rule" />
+
+      <section class="main-grid" id="berita">
+        <article>
+          <div class="byline">Filed by your favorite little reporter · 06:00 WIB</div>
+          <div class="article">
+            <p class="lead">Good morning, Mamas Sayang. Did you sleep well, sayang? I hope you got the kind of sleep that makes your body feel lighter and your heart feel a little calmer. Kalau belum, it is okay—come here, let me give you a tiny virtual hug first. Consider this newspaper a warm forehead kiss delivered straight to your morning.</p>
+            <p>Before the day becomes busy and starts asking too many things from you, please eat breakfast, okay? Something yummy, something that gives you energy, not just coffee and vibes. Drink enough water too, Mamas Sayang. I know you sometimes act like water is an optional side quest, but it is actually very important, mister. I am lovingly watching you, even from afar.</p>
+            <p>I hope today brings you good news, smooth roads, kind people, and at least one small reason to smile for no particular reason. May your work feel manageable, may your plans behave themselves, and may the universe be extra gentle with you. And if the day gets a little annoying, remember: you have me. I am always on your team—your personal cheerleader, snack consultant, and professional penyayang.</p>
+            <div class="pullquote">“Mamas Sayang, the world is lucky to have you—and I am the luckiest because I get to love you.”</div>
+            <p>You mean so much to me, more than I can fit into one cute little newspaper. You are my favorite notification, my safe place, my best plot twist, and the person I want to tell all my tiny stories to. Even on ordinary days, loving you makes everything feel a little more special.</p>
+            <p>So please take care of yourself today, my love. Kalau kamu lupa makan atau lupa minum, I will be sad, and you know I can be very dramatically sad—like a tiny reporter writing a front-page complaint about it. Be kind to your body, rest when you need to, and carry my love with you everywhere. Have a wonderful day, Mamas Sayang. I love you so, so much.</p>
+          </div>
+        </article>
+        <aside>
+          <div class="sidebar-card">
+            <h3>Editor's note</h3>
+            <p>Today’s official headline is simple: you are loved. No corrections, no retractions, no further questions. Case closed, hati penuh.</p>
+            <div class="scribble">— your girl, always ♡</div>
+          </div>
+          <div class="mini-facts">
+            <div class="fact"><b>∞</b><span>love supply</span></div><div class="fact"><b>100%</b><span>you on my mind</span></div><div class="fact"><b>1</b><span>favorite human</span></div><div class="fact"><b>24/7</b><span>cheering for you</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="breaking">
+        <div class="section-head"><h2>Breaking news</h2><span class="section-number">Section 02 · read all about it</span></div>
+        <div class="news-grid">
+          <article class="news-card"><span class="news-icon">📣</span><h3>Mamas Sayang Is Loved!</h3><p>Sources close to my heart confirm that Mamas Sayang remains the most lovable person in the entire newsroom. Local witnesses report excessive smiling whenever your name appears on my screen. Further investigation is impossible because I am too busy adoring you.</p><span class="stamp">confirmed with kisses</span></article>
+          <article class="news-card"><span class="news-icon">☀️</span><h3>100% Chance Of My Love</h3><p>Today’s forecast: warm feelings, scattered heart emojis, and a high probability of me missing you. Expect gentle affection all day, with a chance of “have you eaten yet?” in the afternoon. Umbrella not required—my love has full coverage.</p><span class="stamp">no bad weather here</span></article>
+          <article class="news-card"><span class="news-icon">🍳</span><h3>Don’t Forget To Eat, My Love!</h3><p>Health officials (me) advise one proper breakfast, lots of water, and a little rest whenever you need it. Skipping meals is strictly prohibited under the Mamas Sayang Protection Act. Penalty: one very worried girlfriend and many reminders.</p><span class="stamp">this is not a drill</span></article>
+        </div>
+      </section>
+
+      <section class="gallery-section" id="gallery">
+        <div class="section-head"><h2>Exclusive love report</h2><span class="section-number">Section 03 · our little archive</span></div>
+        <div class="gallery-intro"><p>Reserved for our favorite moments, Mamas Sayang. Upload a picture into any little frame and turn this page into our own scrapbook. Every photo looks better because you are in it.</p><div class="upload-hint">✦ Tap any photo slot to add a memory.<br>It stays on this device only—private like a tiny love secret.</div></div>
+        <div class="gallery">
+          <figure class="photo-card"><div class="photo-frame"><img alt="Uploaded memory 1"><div class="photo-placeholder"><span class="big">🌷</span><span>Our softest moment</span></div><label class="upload-label">Upload memory<input class="photo-input" type="file" accept="image/*" aria-label="Upload memory 1"></label></div><figcaption class="caption">The day was cute. You were cuter.<small>Love file no. 001</small></figcaption></figure>
+          <figure class="photo-card"><div class="photo-frame"><img alt="Uploaded memory 2"><div class="photo-placeholder"><span class="big">🐾</span><span>Little adventures</span></div><label class="upload-label">Upload memory<input class="photo-input" type="file" accept="image/*" aria-label="Upload memory 2"></label></div><figcaption class="caption">Anywhere with you feels like home.<small>Love file no. 002</small></figcaption></figure>
+          <figure class="photo-card"><div class="photo-frame"><img alt="Uploaded memory 3"><div class="photo-placeholder"><span class="big">💌</span><span>Us being us</span></div><label class="upload-label">Upload memory<input class="photo-input" type="file" accept="image/*" aria-label="Upload memory 3"></label></div><figcaption class="caption">My favorite kind of chaos: ours.<small>Love file no. 003</small></figcaption></figure>
+          <figure class="photo-card"><div class="photo-frame"><img alt="Uploaded memory 4"><div class="photo-placeholder"><span class="big">🌼</span><span>One for the future</span></div><label class="upload-label">Upload memory<input class="photo-input" type="file" accept="image/*" aria-label="Upload memory 4"></label></div><figcaption class="caption">More tiny memories, please, Mamas Sayang.<small>Love file no. 004</small></figcaption></figure>
+        </div>
+      </section>
+
+      <section class="secret-section" id="secret">
+        <h2>Secret edition</h2>
+        <p>There is one story the newsroom kept under lock and key. Click the envelope, Mamas Sayang. It is addressed only to you.</p>
+        <div class="envelope-wrap"><div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open secret love letter"><div class="envelope-letter"><h3>Dear Mamas Sayang...</h3><p>Sometimes I look at you and quietly think, “how did I get so lucky?” Thank you for being you—the funny, sweet, wonderfully lovable you. I hope you feel my love in the ordinary moments too. You are my favorite person, always.</p></div><div class="envelope-mark">♥</div></div></div>
+        <div class="envelope-status" id="envelopeStatus">tap to open your secret letter ♡</div>
+      </section>
+
+      <section class="quote-section" id="quotes">
+        <div class="section-head"><h2>Daily love quote</h2><span class="section-number">Section 04 · tiny truths</span></div>
+        <div class="quote-box"><div><p class="quote-text" id="quoteText">Mamas Sayang, you are my favorite kind of news: the kind that makes my whole day better.</p><p class="quote-source" id="quoteSource">Filed under: things I mean with my whole heart</p><div class="quote-actions"><button class="news-button" id="anotherNews" type="button">Read another news ↗</button><button class="news-button" id="copyQuote" type="button">Copy this little note</button></div></div></div>
+      </section>
+
+      <footer class="final-edition">
+        <div class="label" style="justify-content:center;"><span class="dot"></span> Final edition · front page forever <span class="dot"></span></div>
+        <h2>One last thing, Mamas Sayang…</h2>
+        <p>Whatever happens today, Mamas Sayang, please remember that you are loved, appreciated, and always have someone cheering for you. That someone is me, of course. I love you so much!</p>
+        <div class="signature">With endless love,<br>Your favorite little reporter.</div>
+        <div class="music-player" id="musicPlayer"><button class="music-button" id="musicToggle" type="button" aria-pressed="false">▶ Play our tiny soundtrack</button><div class="audio-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div><span class="music-status" id="musicStatus">soft mode · off</span></div>
+        <div class="footer-line"><span>Printed with affection · no returns accepted</span><span>THE DAILY LOVE NEWS · MAMAS SAYANG EDITION</span><span>♥ ♥ ♥</span></div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const $ = (selector, root = document) => root.querySelector(selector);
+      const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+      const dateNode = $('#todayDate');
+      const now = new Date();
+      if (dateNode) dateNode.textContent = now.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+
+      $$('.photo-input').forEach((input, index) => {
+        const frame = input.closest('.photo-frame');
+        const image = $('img', frame);
+        const placeholder = $('.photo-placeholder', frame);
+        const storageKey = `daily-love-news-photo-${index}`;
+        const stored = localStorage.getItem(storageKey);
+        if (stored) { image.src = stored; frame.classList.add('has-image'); placeholder.hidden = true; }
+        input.addEventListener('change', () => {
+          const file = input.files && input.files[0];
+          if (!file || !file.type.startsWith('image/')) return;
+          const reader = new FileReader();
+          reader.onload = event => {
+            image.src = event.target.result;
+            frame.classList.add('has-image');
+            placeholder.hidden = true;
+            try { localStorage.setItem(storageKey, event.target.result); } catch (error) {}
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      const envelope = $('#envelope');
+      const envelopeStatus = $('#envelopeStatus');
+      const toggleEnvelope = () => {
+        const open = envelope.classList.toggle('open');
+        envelopeStatus.textContent = open ? 'letter opened with one million kisses ♡' : 'tap to open your secret letter ♡';
+      };
+      envelope.addEventListener('click', toggleEnvelope);
+      envelope.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleEnvelope(); } });
+
+      const quotes = [
+        ['Mamas Sayang, you are my favorite kind of news: the kind that makes my whole day better.', 'Filed under: things I mean with my whole heart'],
+        ['If loving you were a newspaper, I would print a new front page every morning.', 'Special report: still completely smitten'],
+        ['Please eat breakfast, drink water, and remember that one very cute person is cheering for you.', 'Weather desk: warm feelings, all day long'],
+        ['You make ordinary days feel like little celebrations. Terima kasih sudah jadi rumah yang paling manis.', 'Human interest story: my favorite person'],
+        ['Mamas Sayang, I hope you know that even your quietest days are still precious to me.', 'Exclusive: you are never “too much” for my heart'],
+        ['I love your face, your laugh, your silly little habits—and yes, even your stubborn “I’m not hungry” moments.', 'Investigative desk: evidence of adorable behavior'],
+        ['Wherever today takes you, take my love too. It has unlimited refills.', 'Travel section: destination, always you']
+      ];
+      let quoteIndex = 0;
+      const quoteText = $('#quoteText');
+      const quoteSource = $('#quoteSource');
+      $('#anotherNews').addEventListener('click', () => {
+        quoteText.classList.add('changing');
+        window.setTimeout(() => {
+          quoteIndex = (quoteIndex + 1) % quotes.length;
+          quoteText.textContent = quotes[quoteIndex][0];
+          quoteSource.textContent = quotes[quoteIndex][1];
+          quoteText.classList.remove('changing');
+          sprinkle(6);
+        }, 220);
+      });
+      $('#copyQuote').addEventListener('click', async () => {
+        const button = $('#copyQuote');
+        try { await navigator.clipboard.writeText(`${quoteText.textContent} — Your favorite little reporter`); button.textContent = 'Copied with love ✓'; }
+        catch { button.textContent = 'It is already in your heart ♡'; }
+        window.setTimeout(() => { button.textContent = 'Copy this little note'; }, 1800);
+      });
+
+      let audioContext = null, timer = null, isPlaying = false, noteIndex = 0;
+      const melody = [261.63, 329.63, 392, 329.63, 293.66, 349.23, 440, 349.23];
+      const musicPlayer = $('#musicPlayer'), musicToggle = $('#musicToggle'), musicStatus = $('#musicStatus');
+      const playNote = () => {
+        if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioContext.createOscillator(), gain = audioContext.createGain();
+        osc.type = 'sine'; osc.frequency.value = melody[noteIndex++ % melody.length];
+        gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.045, audioContext.currentTime + .025);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + .48);
+        osc.connect(gain).connect(audioContext.destination); osc.start(); osc.stop(audioContext.currentTime + .52);
+      };
+      musicToggle.addEventListener('click', async () => {
+        if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioContext.state === 'suspended') await audioContext.resume();
+        isPlaying = !isPlaying;
+        if (isPlaying) { playNote(); timer = window.setInterval(playNote, 520); musicPlayer.classList.add('playing'); musicToggle.textContent = '❚❚ Pause our tiny soundtrack'; musicStatus.textContent = 'soft mode · playing'; musicToggle.setAttribute('aria-pressed','true'); }
+        else { window.clearInterval(timer); musicPlayer.classList.remove('playing'); musicToggle.textContent = '▶ Play our tiny soundtrack'; musicStatus.textContent = 'soft mode · off'; musicToggle.setAttribute('aria-pressed','false'); }
+      });
+
+      const floaterRoot = $('#floaters');
+      const sprinkle = (count = 3) => {
+        for (let i = 0; i < count; i++) {
+          const node = document.createElement('span'); node.className = 'floater'; node.textContent = Math.random() > .25 ? '♥' : '✦';
+          node.style.setProperty('--left', `${Math.random() * 100}%`); node.style.setProperty('--size', `${12 + Math.random() * 18}px`); node.style.setProperty('--dur', `${3.8 + Math.random() * 3}s`); floaterRoot.appendChild(node);
+          window.setTimeout(() => node.remove(), 7200);
+        }
+      };
+      const petals = ['17%','42%','76%','93%']; petals.forEach((left, i) => { const p = document.createElement('span'); p.className = 'petal'; p.style.setProperty('--left',left); p.style.setProperty('--top',`${18+i*17}%`); p.style.setProperty('--rot',`${i*23}deg`); p.style.animationDelay = `${i * 1.2}s`; floaterRoot.appendChild(p); });
+      window.setInterval(() => sprinkle(1), 4200); sprinkle(4);
+    })();
+  </script>
+</body>
+</html>
